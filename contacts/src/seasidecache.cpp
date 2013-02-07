@@ -44,8 +44,11 @@
 
 #include <QContactAvatar>
 #include <QContactDetailFilter>
+#include <QContactEmailAddress>
 #include <QContactFavorite>
 #include <QContactName>
+#include <QContactOnlineAccount>
+#include <QContactOrganization>
 #include <QContactPhoneNumber>
 
 #include <QVersitContactExporter>
@@ -133,7 +136,10 @@ SeasideCache::SeasideCache()
     fetchHint.setDetailDefinitionsHint(QStringList()
             << QContactName::DefinitionName
             << QContactAvatar::DefinitionName
-            << QContactPhoneNumber::DefinitionName);
+            << QContactPhoneNumber::DefinitionName
+            << QContactEmailAddress::DefinitionName
+            << QContactOrganization::DefinitionName
+            << QContactOnlineAccount::DefinitionName);
 
     m_fetchRequest.setFetchHint(fetchHint);
     m_fetchRequest.setFilter(QContactFavorite::match());
