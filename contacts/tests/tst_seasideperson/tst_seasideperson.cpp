@@ -423,6 +423,12 @@ void tst_SeasidePerson::marshalling()
     QCOMPARE(person->displayLabel(), QString::fromLatin1("Hello World"));
     QVERIFY(person->favorite());
 
+    {   // Seaside person saves the display label as the custom label.
+        QContactName nameDetail = contact.detail<QContactName>();
+        nameDetail.setCustomLabel("Hello World");
+        contact.saveDetail(&nameDetail);
+    }
+
     QCOMPARE(person->contact(), contact);
 }
 
@@ -431,6 +437,12 @@ void tst_SeasidePerson::setContact()
     QScopedPointer<SeasidePerson> person(new SeasidePerson);
 
     QContact contact;
+
+    {   // ### contactChanged is only emitted if the id differs, not any of the members.
+        QContactId contactId;
+        contactId.setLocalId(5);
+        contact.setId(contactId);
+    }
 
     {
         QContactName nameDetail;
